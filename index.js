@@ -7,8 +7,8 @@
 
 var trim = require( 'lodash.trim' );
 var isObject = require( 'lodash.isobject' );
-var isNull = function (arg) {
-  return require( 'lodash.isnull' )(arg) || typeof arg === 'undefined';
+var isNull = function ( arg ) {
+  return require( 'lodash.isnull' )( arg ) || typeof arg === 'undefined';
 }
 
 var isNullOrEmpty = function ( arg ) {

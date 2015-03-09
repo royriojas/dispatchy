@@ -2,7 +2,6 @@
 [![Build Status](http://img.shields.io/travis/royriojas/dispatchy.svg?style=flat)](https://travis-ci.org/royriojas/dispatchy)
 
 # dispatchy
-# dispatchy
 A jquery like event emitter/dispatcher that could be mixed with other objects to provide emitting capabilities ala jQuery Style
 
 ## Install
