@@ -2,7 +2,7 @@ describe( 'base/dispatcher', function () {
 
   var dispatcherF;
   var sinon = require( 'sinon' );
-  
+
   beforeEach( function () {
     dispatcherF = require( '../index' );
     var me = this;
