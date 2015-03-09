@@ -1,0 +1,46 @@
+{
+  "name": "dispatchy",
+  "version": "1.0.0",
+  "description": "A jquery like event emitter/dispatcher that could be mixed with other objects to provide emitting capabilities ala jQuery Style",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --format 'node_modules/eslint-friendly-formatter' index.js specs/  -c './deps/eslint.json'",
+    "test": "mocha-runner 'specs/**/*.js'",
+    "cover": "istanbul cover -x specs/**/*.js mocha-runner 'specs/**/*.js' html text-summary",
+    "watch": "npm run cover && watch-spawn -p 'specs/**/*.js' -p 'index.js' npm run cover"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/royriojas/dispatchy.git"
+  },
+  "keywords": [
+    "jQuery",
+    "custom",
+    "events",
+    "jquery",
+    "eventEmitter",
+    "eventEmitter",
+    "eventDispatcher",
+    "dispatcher"
+  ],
+  "author": "Roy Riojas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/royriojas/dispatchy/issues"
+  },
+  "homepage": "https://github.com/royriojas/dispatchy",
+  "dependencies": {
+    "lodash.isnull": "^3.0.0",
+    "lodash.isobject": "^3.0.0",
+    "lodash.trim": "^3.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^0.16.1",
+    "eslint-friendly-formatter": "^1.0.3",
+    "istanbul": "^0.3.7",
+    "lodash.random": "^3.0.0",
+    "mocha-runner": "^1.0.1",
+    "proxyquire": "^1.4.0",
+    "watch-spawn": "^1.0.3"
+  }
+}
