@@ -2,12 +2,7 @@ describe( 'base/dispatcher', function () {
 
   var dispatcherF;
   var sinon = require( 'sinon' );
-  var chai = require('chai');
-  var sinonChai = require('sinon-chai');
-  chai.use(sinonChai);
-  var expect = chai.expect;
-
-
+  
   beforeEach( function () {
     dispatcherF = require( '../index' );
     var me = this;
