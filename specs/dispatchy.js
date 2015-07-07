@@ -49,13 +49,9 @@ describe( 'base/dispatcher', function () {
     var fn1 = me.fn1;
     var fn2 = me.fn2;
 
-    testObj.on( {
-      'some:event': fn1
-    } );
+    testObj.on( { 'some:event': fn1 } );
 
-    testObj.on( {
-      'some:event': fn2
-    } );
+    testObj.on( { 'some:event': fn2 } );
 
     testObj.fire( 'some:event' );
 
@@ -113,6 +109,7 @@ describe( 'base/dispatcher', function () {
     testObj.on( 'some:event.ns', fn1 );
 
     testObj.on( 'some:event', fn2 );
+
     // remove the listener using the event name and the listener
     testObj.off( 'some:event.ns' );
 
@@ -170,11 +167,7 @@ describe( 'base/dispatcher', function () {
 
     testObj.one( 'some:event.ns', fn1 );
 
-    var someData = {
-      aNumber: 1,
-      aString: 'string',
-      someFlag: true
-    };
+    var someData = { aNumber: 1, aString: 'string', someFlag: true };
 
     testObj.fire( 'some:event', someData );
 
@@ -252,11 +245,9 @@ describe( 'base/dispatcher', function () {
     var testObj = me.dispatcher;
 
     expect( function () {
-      testObj.on( {
-        'some:event': null
-      } );
+      testObj.on( { 'some:event': null } );
     } ).to.
-      throw ();
+      throw();
   } );
 
   it( 'should do nothing when removing a listener that does not exist', function () {
@@ -266,7 +257,7 @@ describe( 'base/dispatcher', function () {
     expect( function () {
       testObj.off( 'some:event' );
     } ).to.not.
-      throw ();
+      throw();
 
   } );
 
@@ -277,7 +268,7 @@ describe( 'base/dispatcher', function () {
     expect( function () {
       testObj.fire( '' );
     } ).to.not.
-      throw ();
+      throw();
 
   } );
 
@@ -288,7 +279,7 @@ describe( 'base/dispatcher', function () {
     expect( function () {
       testObj.fire( 'myNotExistingEvent' );
     } ).to.not.
-      throw ();
+      throw();
 
   } );
 
@@ -347,7 +338,7 @@ describe( 'base/dispatcher', function () {
       dispatcher.__customEvents = null;
       dispatcher.off( 'app:ready' );
 
-      expect( dispatcher.__customEvents ).to.deep.equal( {} );
+      expect( dispatcher.__customEvents ).to.deep.equal( { } );
     } );
 
     it( 'should register a custom event', function () {

@@ -5,11 +5,19 @@
  * @static
  */
 
-var trim = require( 'lodash.trim' );
-var isObject = require( 'lodash.isobject' );
-var isNull = function ( arg ) {
-  return require( 'lodash.isnull' )( arg ) || typeof arg === 'undefined';
-}
+var trim = function ( str ) {
+  return ((str || '').toString()).trim();
+};
+
+var typeOf = function ( obj ) {
+  return Object.prototype.toString.call( obj ).replace( /^\[object (.+)\]$/, '$1' ).toLowerCase();
+};
+
+var isObject = function ( obj ) {
+  return typeOf( obj ) === 'object';
+};
+
+var isNull = require( 'is-null-like' );
 
 var isNullOrEmpty = function ( arg ) {
   return isNull( arg ) || arg === '';
@@ -229,10 +237,7 @@ var dispatchy = {
 
       var eventName = parts.shift();
 
-      cb && cb( {
-        type: eventName,
-        namespace: parts
-      } );
+      cb && cb( { type: eventName, namespace: parts } );
 
     } );
   },
@@ -246,7 +251,7 @@ var dispatchy = {
     if ( typeof listener !== 'function' ) {
       throw new TypeError( 'listener is not a function' );
     }
-    var listeners = me.__listeners = (me.__listeners || {}),
+    var listeners = me.__listeners = (me.__listeners || { }),
       listenersOfType = listeners[ type ] = (listeners[ type ] || []);
 
     var entry = {
@@ -256,7 +261,7 @@ var dispatchy = {
       justOnce: justOnce
     };
 
-    me.__customEvents = me.__customEvents || {};
+    me.__customEvents = me.__customEvents || { };
 
     var customEvent = me.__customEvents[ type ];
 
@@ -279,7 +284,7 @@ var dispatchy = {
       listenerDefined = !isNull( listener ),
       nsDefined = !isNullOrEmpty( namespace );
 
-    var listeners = me.__listeners = (me.__listeners || {});
+    var listeners = me.__listeners = (me.__listeners || { });
 
     var operateOnType = function ( aType ) {
       var listenersOfType = listeners[ aType ];
@@ -288,7 +293,7 @@ var dispatchy = {
         return;
       }
 
-      me.__customEvents = me.__customEvents || {};
+      me.__customEvents = me.__customEvents || { };
       var customEvent = me.__customEvents[ type ];
 
       if ( !listenerDefined && !nsDefined ) {
@@ -313,10 +318,10 @@ var dispatchy = {
       listeners[ aType ] = listenersOfType.filter( function ( entry ) {
         var sameListener = entry.listener === listener,
           sameNamespace = nsDefined && (entry.namespace.filter( function ( ns ) {
-              return ns === namespace;
-            } ).length > 0);
+                return ns === namespace;
+              } ).length > 0);
 
-        var shouldBeRemoved = ( (listenerDefined && !nsDefined && sameListener) || (listenerDefined && nsDefined && sameListener && sameNamespace) || (!listenerDefined && nsDefined && sameNamespace));
+        var shouldBeRemoved = ((listenerDefined && !nsDefined && sameListener) || (listenerDefined && nsDefined && sameListener && sameNamespace) || (!listenerDefined && nsDefined && sameNamespace));
 
         if ( shouldBeRemoved ) {
           if ( customEvent ) {
@@ -345,6 +350,7 @@ var dispatchy = {
     } );
   },
   _trigger: function ( opts ) {
+
     var type = opts.type,
       typeDefined = !isNullOrEmpty( type ),
       namespace = trim( opts.namespace ),
@@ -356,7 +362,7 @@ var dispatchy = {
     }
 
     var me = this,
-      listeners = me.__listeners = (me.__listeners || {});
+      listeners = me.__listeners = (me.__listeners || { });
 
     var operateOnType = function ( aType ) {
       var listenersOfType = listeners[ aType ];
@@ -373,10 +379,7 @@ var dispatchy = {
               } ).length > 0);
 
           if ( (!nsDefined || isFound) && entry.listener ) {
-            entry.listener( {
-              type: aType,
-              namespace: namespace
-            }, args );
+            entry.listener( { type: aType, namespace: namespace }, args );
             return !entry.justOnce;
           }
           return true;
@@ -407,7 +410,7 @@ var dispatchy = {
    */
   registerEvent: function ( evt, lifeCycle ) {
     var me = this;
-    me.__customEvents = me.__customEvents || {};
+    me.__customEvents = me.__customEvents || { };
     me.__customEvents[ evt ] = lifeCycle;
   },
 
