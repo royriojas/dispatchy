@@ -1,6 +1,6 @@
 {
   "name": "dispatchy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A jquery like event emitter/dispatcher that could be mixed with other objects to provide emitting capabilities ala jQuery Style",
   "main": "index.js",
   "scripts": {
